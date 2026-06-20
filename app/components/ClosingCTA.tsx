@@ -1,15 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const reveal = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.25, 0, 0, 1] as const },
-  },
-};
+import { fadeUp, stagger, viewportOnce } from "../lib/motion";
 
 export default function ClosingCTA() {
   return (
@@ -21,13 +13,13 @@ export default function ClosingCTA() {
         paddingBottom: "clamp(7rem, 16vh, 12rem)",
       }}
     >
-      {/* Radial glow behind the button */}
+      {/* Crimson signal glow behind the CTA */}
       <div
         aria-hidden="true"
         style={{
           position: "absolute",
           left: "50%",
-          bottom: "0",
+          bottom: 0,
           transform: "translateX(-50%)",
           width: "min(900px, 120vw)",
           height: "600px",
@@ -42,31 +34,25 @@ export default function ClosingCTA() {
         className="section__inner"
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, margin: "-80px" }}
-        variants={{
-          hidden: {},
-          show: { transition: { staggerChildren: 0.15 } },
-        }}
+        viewport={viewportOnce}
+        variants={stagger}
         style={{
           position: "relative",
           zIndex: 1,
           maxWidth: "820px",
+          margin: "0 auto",
           textAlign: "center",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <motion.span
-          variants={reveal}
-          className="label"
-          style={{ marginBottom: "1.75rem" }}
-        >
-          Enter the slate
+        <motion.span variants={fadeUp} className="label">
+          Contact
         </motion.span>
 
         <motion.h2
-          variants={reveal}
+          variants={fadeUp}
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: 400,
@@ -77,36 +63,30 @@ export default function ClosingCTA() {
             margin: "1.25rem 0",
           }}
         >
-          The story starts in the dark.
+          Maniac Productions
           <br />
-          <span
-            style={{ fontStyle: "italic", color: "var(--color-body)" }}
-          >
-            Then it cuts through.
+          <span style={{ fontStyle: "italic", color: "var(--color-body)" }}>
+            Los Angeles
           </span>
         </motion.h2>
 
         <motion.p
-          variants={reveal}
+          variants={fadeUp}
           className="body-copy"
-          style={{
-            margin: "1rem auto 2.75rem",
-            textAlign: "center",
-            maxWidth: "48ch",
-          }}
+          style={{ margin: "1rem auto 2.75rem", textAlign: "center", maxWidth: "46ch" }}
         >
-          Maniac Productions builds film and television for the charged space
-          between control and chaos.
+          For inquiries regarding film and television projects. Maniac
+          Productions and Michael Seitzman are represented by WME.
         </motion.p>
 
-        <motion.div variants={reveal}>
-          {/* TODO: swap href="#" for a mailto: contact address once one exists. */}
+        <motion.div variants={fadeUp}>
+          {/* TODO: swap href="#" for a real mailto: / agency contact when available. */}
           <motion.a
             href="#"
             className="button button--outline"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            transition={{ duration: 0.25, ease: [0.25, 0, 0, 1] }}
+            transition={{ duration: 0.2 }}
           >
             Contact Maniac Productions
           </motion.a>
