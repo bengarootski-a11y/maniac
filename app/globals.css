@@ -1,0 +1,246 @@
+/* ============================================================
+   Maniac Productions — Global Styles
+   ============================================================ */
+
+:root {
+  /* Backgrounds */
+  --color-bg: #000000;
+
+  /* Text */
+  --color-text: #ffffff;
+  --color-body: #e5e5e5;
+  --color-dim: #888888; /* never use text darker than this on black */
+
+  /* Accents */
+  --color-crimson: #c1121f;
+  --color-crimson-hover: #ff2a3d;
+  --color-silver: #b8b8b8;
+
+  /* Borders & surfaces */
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --border-crimson: rgba(193, 18, 31, 0.35);
+  --glass-panel: rgba(255, 255, 255, 0.045);
+
+  /* Fonts (variables provided by next/font in layout.tsx) */
+  --font-body: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-playfair), Georgia, serif;
+
+  /* Section rhythm */
+  --section-padding-y: clamp(5rem, 12vh, 10rem);
+  --section-padding-x: clamp(1.5rem, 6vw, 7rem);
+  --content-max: 1200px;
+}
+
+/* ------------------------------------------------------------
+   Reset
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background-color: var(--color-bg);
+  color: var(--color-body);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+picture,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+/* ------------------------------------------------------------
+   Reusable layout / type classes
+   ------------------------------------------------------------ */
+.section {
+  position: relative;
+  padding: var(--section-padding-y) var(--section-padding-x);
+}
+
+.section__inner {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-crimson);
+  font-weight: 500;
+  display: inline-block;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  max-width: 18ch;
+}
+
+.body-copy {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--color-body);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.7;
+  max-width: 56ch;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.95rem 2.6rem;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.button--primary {
+  background-color: var(--color-crimson);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.button--primary:hover {
+  background-color: var(--color-crimson-hover);
+}
+
+.button--outline {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid var(--color-crimson);
+}
+
+.button--outline:hover {
+  background-color: var(--color-crimson);
+  color: #fff;
+}
+
+/* Glass card */
+.glass-card {
+  background: var(--glass-panel);
+  border: 1px solid var(--border-crimson);
+  border-radius: 4px;
+  backdrop-filter: blur(6px);
+}
+
+/* Project card */
+.project-card {
+  background: var(--glass-panel);
+  border: 1px solid var(--border-subtle);
+  border-top: 2px solid var(--color-crimson);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.project-card:hover {
+  border-color: var(--border-crimson);
+  box-shadow: 0 18px 50px -20px rgba(193, 18, 31, 0.45);
+}
+
+/* Process editorial list */
+.process-row {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.4fr) 1fr;
+  gap: clamp(1rem, 4vw, 3rem);
+  align-items: baseline;
+  padding: clamp(1.1rem, 2vw, 1.6rem) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+@media (max-width: 768px) {
+  .process-row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
+
+/* ------------------------------------------------------------
+   Film-grain / noise overlay
+   Inline SVG fractal noise, fixed, non-interactive, low opacity.
+   ------------------------------------------------------------ */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* ------------------------------------------------------------
+   Reduced motion
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .grain-overlay {
+    display: none;
+  }
+}
