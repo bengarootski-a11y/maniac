@@ -2,37 +2,51 @@
 
 // Future upgrade: convert hero video into a frame sequence and scrub on scroll with canvas.
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
+import { EASE } from "../lib/motion";
 
 export default function HeroVideo() {
   const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
 
-  // Scroll-driven: the hero fades / drifts / scales as it leaves the viewport.
+  // The logo plays ONCE as a cinematic reveal, then steps aside (no infinite loop).
+  const [introDone, setIntroDone] = useState(false);
+
+  // Fallback: if the video can't fire `onEnded` (autoplay blocked, etc.),
+  // dismiss the intro after a safe timeout so the page is never stuck.
+  useEffect(() => {
+    if (reduceMotion) {
+      setIntroDone(true);
+      return;
+    }
+    const t = setTimeout(() => setIntroDone(true), 6500);
+    return () => clearTimeout(t);
+  }, [reduceMotion]);
+
+  // Scroll-driven: hero text drifts and fades as the section leaves the viewport.
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const glowY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   const container = {
     hidden: {},
-    show: {
-      transition: { staggerChildren: 0.18, delayChildren: 0.2 },
-    },
+    show: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
   };
-
   const item = {
-    hidden: { opacity: 0, y: 24 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.9, ease: [0.25, 0, 0, 1] as const },
-    },
+    hidden: { opacity: 0, y: 26 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE } },
   };
 
   return (
@@ -43,66 +57,89 @@ export default function HeroVideo() {
         minHeight: "100svh",
         width: "100%",
         overflow: "hidden",
-        backgroundColor: "#000000",
+        backgroundColor: "#000",
         display: "flex",
         alignItems: "center",
       }}
     >
-      {/* Fullscreen background video (decorative) */}
+      {/* One-time logo intro overlay */}
+      <AnimatePresence>
+        {!introDone && !reduceMotion && (
+          <motion.div
+            key="intro"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.9, ease: EASE }}
+            style={{
+              position: "absolute",
+              inset: 0,
+              zIndex: 5,
+              backgroundColor: "#000",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              playsInline
+              preload="auto"
+              aria-hidden="true"
+              onEnded={() => setIntroDone(true)}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            >
+              <source src="/video/logo-hero-4k.mp4" type="video/mp4" />
+            </video>
+            {/* gentle vignette over the logo */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%)",
+              }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Crimson signal glow (scroll-reactive) */}
       <motion.div
+        aria-hidden="true"
         style={{
           position: "absolute",
           inset: 0,
-          scale: reduceMotion ? 1 : videoScale,
           zIndex: 0,
+          y: reduceMotion ? 0 : glowY,
+          background:
+            "radial-gradient(ellipse 55% 45% at 28% 55%, rgba(193,18,31,0.20) 0%, transparent 70%)",
         }}
-      >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        >
-          <source src="/video/logo-hero-4k.mp4" type="video/mp4" />
-        </video>
-      </motion.div>
+      />
 
-      {/* Dark gradient overlay for legibility */}
+      {/* faint film-frame guides for production-slate texture */}
       <div
         aria-hidden="true"
         style={{
           position: "absolute",
           inset: 0,
-          zIndex: 1,
+          zIndex: 0,
           background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.85) 100%)",
+            "linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.85) 100%)",
         }}
       />
 
-      {/* Subtle crimson radial glow */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 1,
-          background:
-            "radial-gradient(ellipse 60% 50% at 30% 60%, rgba(193,18,31,0.18) 0%, transparent 70%)",
-        }}
-      />
-
-      {/* Content */}
+      {/* Hero content */}
       <motion.div
         variants={container}
         initial="hidden"
-        animate="show"
+        animate={introDone ? "show" : "hidden"}
         style={{
           position: "relative",
           zIndex: 2,
@@ -114,28 +151,26 @@ export default function HeroVideo() {
           opacity: reduceMotion ? 1 : contentOpacity,
         }}
       >
-        <motion.span
-          variants={item}
-          className="label"
-          style={{ marginBottom: "1.5rem" }}
-        >
-          Maniac Productions · Los Angeles
+        <motion.span variants={item} className="label">
+          Film &amp; Television · Los Angeles
         </motion.span>
 
         <motion.h1
           variants={item}
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(2.8rem, 7vw, 6.5rem)",
+            fontSize: "clamp(2.6rem, 6.5vw, 6rem)",
             fontWeight: 400,
-            lineHeight: 0.95,
+            lineHeight: 0.98,
             letterSpacing: "-0.04em",
-            maxWidth: "900px",
+            maxWidth: "16ch",
             color: "var(--color-text)",
             margin: "1.5rem 0",
           }}
         >
-          Stories with a pulse.
+          Film and television,
+          <br />
+          founded by Michael Seitzman.
         </motion.h1>
 
         <motion.p
@@ -144,14 +179,15 @@ export default function HeroVideo() {
             fontFamily: "var(--font-body)",
             fontWeight: 300,
             color: "var(--color-body)",
-            fontSize: "clamp(1rem, 1.4vw, 1.25rem)",
-            lineHeight: 1.65,
-            maxWidth: "540px",
+            fontSize: "clamp(1.02rem, 1.4vw, 1.25rem)",
+            lineHeight: 1.7,
+            maxWidth: "560px",
             marginBottom: "2.5rem",
           }}
         >
-          Film and television from Michael Seitzman — built for tension,
-          character, and the moment everything turns.
+          Maniac Productions develops drama across broadcast, cable, streaming,
+          and feature film — currently in an overall deal at Blumhouse
+          Television.
         </motion.p>
 
         <motion.div variants={item}>
@@ -165,8 +201,8 @@ export default function HeroVideo() {
       <motion.div
         aria-hidden="true"
         initial={{ opacity: 0 }}
-        animate={{ opacity: reduceMotion ? 0 : [0.2, 0.7, 0.2] }}
-        transition={{ duration: 2.4, repeat: Infinity, delay: 1.4 }}
+        animate={{ opacity: introDone && !reduceMotion ? [0.2, 0.7, 0.2] : 0 }}
+        transition={{ duration: 2.4, repeat: Infinity }}
         style={{
           position: "absolute",
           bottom: "2rem",

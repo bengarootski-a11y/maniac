@@ -5,6 +5,7 @@
 :root {
   /* Backgrounds */
   --color-bg: #000000;
+  --color-bg-raise: #0a0a0a;
 
   /* Text */
   --color-text: #ffffff;
@@ -12,12 +13,16 @@
   --color-dim: #888888; /* never use text darker than this on black */
 
   /* Accents */
-  --color-crimson: #c1121f;
+  --color-crimson: #c1121f; /* brand: borders, glows, fills */
   --color-crimson-hover: #ff2a3d;
+  /* Crimson is only 3.4:1 on black — too low for small text. Use this
+     brighter tone (5.6:1) for small label/eyebrow text. (a11y: color-contrast) */
+  --color-crimson-text: #ff3b4d;
   --color-silver: #b8b8b8;
 
   /* Borders & surfaces */
   --border-subtle: rgba(255, 255, 255, 0.12);
+  --border-faint: rgba(255, 255, 255, 0.07);
   --border-crimson: rgba(193, 18, 31, 0.35);
   --glass-panel: rgba(255, 255, 255, 0.045);
 
@@ -25,15 +30,13 @@
   --font-body: var(--font-inter), system-ui, -apple-system, sans-serif;
   --font-display: var(--font-playfair), Georgia, serif;
 
-  /* Section rhythm */
-  --section-padding-y: clamp(5rem, 12vh, 10rem);
+  /* Section rhythm (8pt scale) */
+  --section-padding-y: clamp(6rem, 14vh, 12rem);
   --section-padding-x: clamp(1.5rem, 6vw, 7rem);
   --content-max: 1200px;
 }
 
-/* ------------------------------------------------------------
-   Reset
-   ------------------------------------------------------------ */
+/* ------------------------------------------------------------ Reset */
 *,
 *::before,
 *::after {
@@ -86,16 +89,25 @@ button {
   background: none;
 }
 
+::selection {
+  background: var(--color-crimson);
+  color: #fff;
+}
+
+/* Visible focus rings (a11y: focus-states) */
+:focus-visible {
+  outline: 2px solid var(--color-crimson-text);
+  outline-offset: 3px;
+}
+
 h1,
 h2,
 h3 {
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.05;
 }
 
-/* ------------------------------------------------------------
-   Reusable layout / type classes
-   ------------------------------------------------------------ */
+/* ------------------------------------------------------------ Layout / type */
 .section {
   position: relative;
   padding: var(--section-padding-y) var(--section-padding-x);
@@ -109,10 +121,10 @@ h3 {
 
 .label {
   font-family: var(--font-body);
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--color-crimson);
+  color: var(--color-crimson-text);
   font-weight: 500;
   display: inline-block;
 }
@@ -122,30 +134,34 @@ h3 {
   font-weight: 400;
   color: var(--color-text);
   letter-spacing: -0.02em;
-  line-height: 1.05;
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
-  max-width: 18ch;
+  line-height: 1.04;
+  font-size: clamp(2rem, 4.8vw, 3.6rem);
+  max-width: 20ch;
 }
 
 .body-copy {
   font-family: var(--font-body);
   font-weight: 300;
   color: var(--color-body);
-  font-size: clamp(1rem, 1.3vw, 1.15rem);
-  line-height: 1.7;
-  max-width: 56ch;
+  font-size: clamp(1.02rem, 1.3vw, 1.18rem);
+  line-height: 1.75;
+  max-width: 58ch;
 }
 
 /* Buttons */
 .button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 0.95rem 2.6rem;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  padding: 1rem 2.6rem;
+  min-height: 48px; /* touch target */
+  transition: background-color 0.25s ease, color 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .button--primary {
@@ -153,7 +169,6 @@ h3 {
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
-
 .button--primary:hover {
   background-color: var(--color-crimson-hover);
 }
@@ -163,7 +178,6 @@ h3 {
   color: #fff;
   border: 1px solid var(--color-crimson);
 }
-
 .button--outline:hover {
   background-color: var(--color-crimson);
   color: #fff;
@@ -174,64 +188,73 @@ h3 {
   background: var(--glass-panel);
   border: 1px solid var(--border-crimson);
   border-radius: 4px;
-  backdrop-filter: blur(6px);
 }
 
 /* Project card */
 .project-card {
+  display: block;
   background: var(--glass-panel);
   border: 1px solid var(--border-subtle);
   border-top: 2px solid var(--color-crimson);
   border-radius: 4px;
   overflow: hidden;
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
 }
-
 .project-card:hover {
   border-color: var(--border-crimson);
-  box-shadow: 0 18px 50px -20px rgba(193, 18, 31, 0.45);
+  box-shadow: 0 20px 55px -22px rgba(193, 18, 31, 0.5);
 }
 
-/* Process editorial list */
-.process-row {
+/* Editorial row (range / formats) */
+.editorial-row {
   display: grid;
-  grid-template-columns: minmax(160px, 0.4fr) 1fr;
+  grid-template-columns: minmax(170px, 0.45fr) 1fr;
   gap: clamp(1rem, 4vw, 3rem);
   align-items: baseline;
-  padding: clamp(1.1rem, 2vw, 1.6rem) 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  padding: clamp(1.1rem, 2.4vw, 1.8rem) 0;
+  border-bottom: 1px solid var(--border-faint);
+}
+.editorial-row:first-child {
+  border-top: 1px solid var(--border-faint);
+}
+
+/* Fact list */
+.fact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--border-faint);
+}
+.fact-row:first-child {
+  border-top: none;
 }
 
 @media (max-width: 768px) {
-  .process-row {
+  .editorial-row {
     grid-template-columns: 1fr;
     gap: 0.4rem;
   }
 }
 
-/* ------------------------------------------------------------
-   Film-grain / noise overlay
-   Inline SVG fractal noise, fixed, non-interactive, low opacity.
-   ------------------------------------------------------------ */
+/* ------------------------------------------------------------ Grain overlay */
 .grain-overlay {
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.045;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
 }
 
-/* ------------------------------------------------------------
-   Reduced motion
-   ------------------------------------------------------------ */
+/* ------------------------------------------------------------ Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-
   *,
   *::before,
   *::after {
@@ -239,7 +262,6 @@ h3 {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-
   .grain-overlay {
     display: none;
   }

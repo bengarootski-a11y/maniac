@@ -1,20 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { fadeUp, stagger, viewportOnce } from "../lib/motion";
 
-const reveal = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.25, 0, 0, 1] as const },
-  },
-};
-
-const principles = [
-  "Character first",
-  "Pressure reveals truth",
-  "Every frame earns the next",
+// Verified facts: founded 2017 (Deadline), overall deal at Blumhouse Television
+// (maniacprods.com/about), develops for broadcast/cable/streaming (Deadline),
+// represented by WME (maniacprods.com/about).
+const facts: { k: string; v: string }[] = [
+  { k: "Founded", v: "2017, Los Angeles" },
+  { k: "Overall deal", v: "Blumhouse Television" },
+  { k: "Develops for", v: "Broadcast · Cable · Streaming" },
+  { k: "Disciplines", v: "Scripted & Unscripted · Feature Film" },
+  { k: "Representation", v: "WME" },
 ];
 
 export default function StudioSection() {
@@ -24,11 +21,8 @@ export default function StudioSection() {
         className="section__inner"
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, margin: "-80px" }}
-        variants={{
-          hidden: {},
-          show: { transition: { staggerChildren: 0.15 } },
-        }}
+        viewport={viewportOnce}
+        variants={stagger}
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
@@ -36,75 +30,64 @@ export default function StudioSection() {
           alignItems: "start",
         }}
       >
-        {/* Left column */}
-        <motion.div variants={reveal}>
-          <span className="label" style={{ marginBottom: "1.5rem" }}>
-            Founded by Michael Seitzman
-          </span>
+        {/* Left */}
+        <motion.div variants={fadeUp}>
+          <span className="label">The Studio</span>
           <h2 className="heading" style={{ margin: "1.25rem 0 1.75rem" }}>
-            Built for the moment before everything changes.
+            A film and television company built on character-driven drama.
           </h2>
           <p className="body-copy">
-            Maniac Productions develops film and television with a focus on
-            tension, character, propulsion, and emotional consequence. The work
-            moves between network drama, premium streaming, unscripted
-            storytelling, and feature film.
+            Maniac Productions was founded in 2017 by writer-producer Michael
+            Seitzman. The company develops and produces scripted and unscripted
+            series for broadcast, cable, and streaming, alongside feature film —
+            from network medical and legal drama to documentary and supernatural
+            thriller.
+          </p>
+          <p className="body-copy" style={{ marginTop: "1.25rem" }}>
+            Today the company works under an overall deal at Blumhouse
+            Television, with current work including USA Network&apos;s adaptation
+            of John Grisham&apos;s <em>The Rainmaker</em>.
           </p>
         </motion.div>
 
-        {/* Right column — glass card */}
+        {/* Right — fact card */}
         <motion.div
-          variants={reveal}
+          variants={fadeUp}
           className="glass-card"
-          style={{
-            padding: "clamp(2rem, 3vw, 2.75rem)",
-          }}
+          style={{ padding: "clamp(1.75rem, 3vw, 2.5rem)" }}
         >
-          <span className="label" style={{ marginBottom: "1.75rem" }}>
-            Principles
+          <span className="label" style={{ marginBottom: "0.5rem" }}>
+            At a glance
           </span>
-          <ul
-            style={{
-              listStyle: "none",
-              display: "flex",
-              flexDirection: "column",
-              marginTop: "1.5rem",
-            }}
-          >
-            {principles.map((p, i) => (
-              <li
-                key={p}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                  padding: "1.1rem 0",
-                  borderTop:
-                    i === 0 ? "none" : "1px solid rgba(255,255,255,0.08)",
-                }}
-              >
+          <div style={{ marginTop: "1.25rem" }}>
+            {facts.map((f) => (
+              <div key={f.k} className="fact-row">
                 <span
-                  aria-hidden="true"
                   style={{
-                    width: "6px",
-                    height: "6px",
-                    borderRadius: "50%",
-                    backgroundColor: "var(--color-crimson)",
+                    fontFamily: "var(--font-body)",
+                    fontSize: "0.7rem",
+                    letterSpacing: "0.16em",
+                    textTransform: "uppercase",
+                    color: "var(--color-dim)",
+                    fontWeight: 500,
                     flexShrink: 0,
                   }}
-                />
+                >
+                  {f.k}
+                </span>
                 <span
                   style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "clamp(1.1rem, 1.6vw, 1.4rem)",
+                    fontFamily: "var(--font-body)",
+                    fontSize: "0.95rem",
                     color: "var(--color-text)",
+                    textAlign: "right",
                   }}
                 >
-                  {p}
+                  {f.v}
                 </span>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </motion.div>
       </motion.div>
     </section>

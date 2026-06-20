@@ -1,20 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { fadeUp, stagger, viewportOnce } from "../lib/motion";
 
-const reveal = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.25, 0, 0, 1] as const },
-  },
-};
-
+// Verified: Wikipedia + Deadline. Roles stated factually, no invented detail.
 const creditStrip = [
-  "Writer / Producer",
+  "Writer · Producer · Director",
   "Founder, Maniac Productions",
-  "Film & Television",
+  "Showrunner, The Rainmaker",
   "Los Angeles",
 ];
 
@@ -25,49 +18,59 @@ export default function FounderSection() {
         className="section__inner"
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, margin: "-80px" }}
-        variants={{
-          hidden: {},
-          show: { transition: { staggerChildren: 0.15 } },
-        }}
+        viewport={viewportOnce}
+        variants={stagger}
         style={{
-          maxWidth: "760px",
+          maxWidth: "780px",
+          margin: "0 auto",
           textAlign: "center",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <motion.span
-          variants={reveal}
-          className="label"
-          style={{ marginBottom: "1.5rem" }}
-        >
+        <motion.span variants={fadeUp} className="label">
           Founder
         </motion.span>
 
         <motion.h2
-          variants={reveal}
+          variants={fadeUp}
           className="heading"
-          style={{ margin: "1.25rem 0 1.75rem", maxWidth: "none" }}
+          style={{
+            margin: "1.25rem 0 1.75rem",
+            maxWidth: "none",
+            textAlign: "center",
+          }}
         >
           Michael Seitzman
         </motion.h2>
 
         <motion.p
-          variants={reveal}
+          variants={fadeUp}
           className="body-copy"
           style={{ margin: "0 auto", textAlign: "center" }}
         >
-          Michael Seitzman is a writer, producer, and founder of Maniac
-          Productions. His work spans network television, unscripted series, and
-          feature film, with credits across drama, thriller, medical, legal, and
-          character-driven storytelling.
+          Michael Seitzman is a writer, producer, and director, and the founder
+          of Maniac Productions. He is best known for writing the feature film{" "}
+          <em>North Country</em>, which earned two Academy Award nominations, and
+          serves as creator, showrunner, and executive producer of{" "}
+          <em>The Rainmaker</em>, USA Network&apos;s adaptation of the John
+          Grisham novel.
         </motion.p>
 
-        {/* Credit strip */}
+        <motion.p
+          variants={fadeUp}
+          className="body-copy"
+          style={{ margin: "1.25rem auto 0", textAlign: "center" }}
+        >
+          His television work also includes <em>Quantico</em>,{" "}
+          <em>Code Black</em>, and <em>Intelligence</em>, alongside feature and
+          documentary projects spanning drama, thriller, legal, and medical
+          storytelling.
+        </motion.p>
+
         <motion.div
-          variants={reveal}
+          variants={fadeUp}
           style={{
             marginTop: "clamp(2.5rem, 4vw, 3.5rem)",
             display: "flex",
@@ -80,17 +83,13 @@ export default function FounderSection() {
           {creditStrip.map((credit, i) => (
             <span
               key={credit}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "1.25rem",
-              }}
+              style={{ display: "inline-flex", alignItems: "center", gap: "1.25rem" }}
             >
               <span
                 style={{
                   fontFamily: "var(--font-body)",
                   fontSize: "0.7rem",
-                  letterSpacing: "0.18em",
+                  letterSpacing: "0.16em",
                   textTransform: "uppercase",
                   color: "var(--color-silver)",
                   fontWeight: 400,
@@ -99,10 +98,7 @@ export default function FounderSection() {
                 {credit}
               </span>
               {i < creditStrip.length - 1 && (
-                <span
-                  aria-hidden="true"
-                  style={{ color: "var(--color-crimson)", fontSize: "0.7rem" }}
-                >
+                <span aria-hidden="true" style={{ color: "var(--color-crimson-text)" }}>
                   ·
                 </span>
               )}
