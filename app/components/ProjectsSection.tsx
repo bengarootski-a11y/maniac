@@ -74,6 +74,8 @@ const projects: Project[] = [
     copy: "An action drama about an operative enhanced with a microchip that links him directly to the global information grid.",
     poster: "/posters/intelligence.jpg",
     alt: "Key art for the CBS action drama Intelligence.",
+    href: "https://www.youtube.com/watch?v=fuVONyBqw2k",
+    cta: "Trailer",
   },
   {
     title: "North Country",
