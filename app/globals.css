@@ -205,6 +205,41 @@ h3 {
   box-shadow: 0 20px 55px -22px rgba(193, 18, 31, 0.5);
 }
 
+/* Founder layout */
+.founder-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 420px) 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.founder-portrait {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-top: 2px solid var(--color-crimson);
+  border-radius: 4px;
+  background: var(--color-bg-raise);
+}
+.founder-portrait--sticky {
+  position: sticky;
+  top: calc(68px + 2rem);
+}
+@media (max-width: 860px) {
+  .founder-grid {
+    grid-template-columns: 1fr;
+  }
+  .founder-portrait {
+    max-width: 340px;
+    margin: 0 auto;
+  }
+  .founder-portrait--sticky {
+    position: relative;
+    top: 0;
+  }
+}
+
 /* Nav + text links */
 .nav-link {
   position: relative;
