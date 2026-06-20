@@ -26,12 +26,6 @@ export const news: NewsItem[] = [
     href: "https://www.disneyplus.com/browse/entity-ef5936aa-dd74-4ebc-8913-df28121c2b69",
   },
   {
-    date: "May 2021",
-    source: "Variety",
-    title: "‘Battersea Poltergeist’ to Be Adapted by Blumhouse TV and Maniac Productions",
-    href: "https://variety.com/2021/tv/news/battersea-poltergeist-series-blumhouse-tv-maniac-productions-1234981001/",
-  },
-  {
     date: "Sep 2017",
     source: "Deadline",
     title: "Michael Seitzman Partners With Christina Davis To Launch Maniac Production Company",
