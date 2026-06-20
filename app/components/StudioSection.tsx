@@ -4,12 +4,11 @@ import { motion } from "framer-motion";
 import { fadeUp, stagger, viewportOnce } from "../lib/motion";
 import Parallax from "./Parallax";
 
-// Verified facts: founded 2017 (Deadline), overall deal at Blumhouse Television
-// (maniacprods.com/about), develops for broadcast/cable/streaming (Deadline),
-// represented by WME (maniacprods.com/about).
+// Verified facts: founded 2017 (Deadline), develops for broadcast/cable/streaming
+// (Deadline), represented by WME (maniacprods.com/about).
 const facts: { k: string; v: string }[] = [
   { k: "Founded", v: "2017, Los Angeles" },
-  { k: "Overall deal", v: "Blumhouse Television" },
+  { k: "Current series", v: "The Rainmaker (USA Network)" },
   { k: "Develops for", v: "Broadcast · Cable · Streaming" },
   { k: "Disciplines", v: "Scripted & Unscripted · Feature Film" },
   { k: "Representation", v: "WME" },
@@ -44,8 +43,7 @@ export default function StudioSection() {
             and streaming, and has produced feature films and documentary work.
           </p>
           <p className="body-copy" style={{ marginTop: "1.25rem" }}>
-            It now operates under an overall deal at Blumhouse Television. Its
-            current series, <em>The Rainmaker</em>, adapts the John Grisham
+            Its current series, <em>The Rainmaker</em>, adapts the John Grisham
             novel for USA Network and was renewed for a second season in 2025.
           </p>
         </motion.div>

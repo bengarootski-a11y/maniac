@@ -34,8 +34,8 @@ export default function FounderProfile() {
             <motion.p variants={fadeUp} className="body-copy">
               Michael Seitzman is a writer, producer, and director. He founded
               Maniac Productions in 2017 with former CBS drama head Christina
-              Davis, originally under an overall deal at ABC Studios, and now
-              runs the company in an overall deal at Blumhouse Television.
+              Davis, and has run the company across network drama, documentary,
+              and feature film.
             </motion.p>
 
             <motion.p

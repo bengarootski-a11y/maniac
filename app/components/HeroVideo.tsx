@@ -185,9 +185,8 @@ export default function HeroVideo() {
             marginBottom: "2.5rem",
           }}
         >
-          The film and television company founded by Michael Seitzman. Network
-          drama, documentary, and feature film, currently under an overall deal
-          at Blumhouse Television.
+          The film and television company founded by Michael Seitzman — network
+          drama, documentary, and feature film.
         </motion.p>
 
         <motion.div variants={item}>

@@ -32,12 +32,6 @@ export const news: NewsItem[] = [
     href: "https://variety.com/2021/tv/news/battersea-poltergeist-series-blumhouse-tv-maniac-productions-1234981001/",
   },
   {
-    date: "Jan 2021",
-    source: "Deadline",
-    title: "Michael Seitzman Inks First-Look TV Deal With Blumhouse",
-    href: "https://deadline.com/2021/01/michael-seitzman-i-first-look-tv-deal-blumhouse-1234680624/",
-  },
-  {
     date: "Sep 2017",
     source: "Deadline",
     title: "Michael Seitzman Partners With Christina Davis To Launch Maniac Production Company",
