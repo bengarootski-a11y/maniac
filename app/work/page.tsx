@@ -26,7 +26,7 @@ export default function WorkPage() {
           </p>
         </div>
       </header>
-      <ProjectsSection heading="The full slate." />
+      <ProjectsSection showHeader={false} />
     </main>
   );
 }

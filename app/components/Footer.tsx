@@ -1,12 +1,6 @@
 import Link from "next/link";
 import SocialLinks from "./SocialLinks";
 
-const navLinks = [
-  { href: "/work", label: "Work" },
-  { href: "/founder", label: "Founder" },
-  { href: "/news", label: "News" },
-];
-
 export default function Footer() {
   return (
     <footer
@@ -48,29 +42,6 @@ export default function Footer() {
             Film &amp; Television · Los Angeles
           </p>
         </div>
-
-        <nav
-          aria-label="Footer"
-          style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem" }}
-        >
-          {navLinks.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="nav-link"
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "0.72rem",
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
-                fontWeight: 500,
-                color: "var(--color-body)",
-              }}
-            >
-              {l.label}
-            </Link>
-          ))}
-        </nav>
 
         <SocialLinks />
       </div>

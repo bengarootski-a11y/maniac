@@ -25,7 +25,7 @@ export default function NewsPage() {
           </p>
         </div>
       </header>
-      <NewsSection />
+      <NewsSection showHeader={false} />
     </main>
   );
 }
