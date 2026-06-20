@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeUp, stagger, viewportOnce } from "../lib/motion";
+import Parallax from "./Parallax";
 
 // Verified facts: founded 2017 (Deadline), overall deal at Blumhouse Television
 // (maniacprods.com/about), develops for broadcast/cable/streaming (Deadline),
@@ -49,7 +50,8 @@ export default function StudioSection() {
           </p>
         </motion.div>
 
-        {/* Right — fact card */}
+        {/* Right — fact card (scroll-linked drift) */}
+        <Parallax amount={36}>
         <motion.div
           variants={fadeUp}
           className="glass-card"
@@ -88,6 +90,7 @@ export default function StudioSection() {
             ))}
           </div>
         </motion.div>
+        </Parallax>
       </motion.div>
     </section>
   );

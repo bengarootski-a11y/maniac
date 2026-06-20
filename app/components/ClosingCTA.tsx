@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { fadeUp, stagger, viewportOnce } from "../lib/motion";
 import { CONTACT_HREF } from "../lib/links";
+import Parallax from "./Parallax";
 
 export default function ClosingCTA() {
   return (
@@ -15,8 +16,9 @@ export default function ClosingCTA() {
         paddingBottom: "clamp(7rem, 16vh, 12rem)",
       }}
     >
-      {/* Crimson signal glow behind the CTA */}
-      <div
+      {/* Crimson signal glow behind the CTA (scroll-linked drift) */}
+      <Parallax
+        amount={70}
         aria-hidden="true"
         style={{
           position: "absolute",
@@ -30,7 +32,9 @@ export default function ClosingCTA() {
           pointerEvents: "none",
           zIndex: 0,
         }}
-      />
+      >
+        <span />
+      </Parallax>
 
       <motion.div
         className="section__inner"
