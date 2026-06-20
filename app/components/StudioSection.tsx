@@ -34,19 +34,18 @@ export default function StudioSection() {
         <motion.div variants={fadeUp}>
           <span className="label">The Studio</span>
           <h2 className="heading" style={{ margin: "1.25rem 0 1.75rem" }}>
-            A film and television company built on character-driven drama.
+            From network drama to feature film.
           </h2>
           <p className="body-copy">
             Maniac Productions was founded in 2017 by writer-producer Michael
-            Seitzman. The company develops and produces scripted and unscripted
-            series for broadcast, cable, and streaming, alongside feature film —
-            from network medical and legal drama to documentary and supernatural
-            thriller.
+            Seitzman, alongside former CBS drama head Christina Davis. The
+            company makes scripted and unscripted series for broadcast, cable,
+            and streaming, and has produced feature films and documentary work.
           </p>
           <p className="body-copy" style={{ marginTop: "1.25rem" }}>
-            Today the company works under an overall deal at Blumhouse
-            Television, with current work including USA Network&apos;s adaptation
-            of John Grisham&apos;s <em>The Rainmaker</em>.
+            It now operates under an overall deal at Blumhouse Television. Its
+            current series, <em>The Rainmaker</em>, adapts the John Grisham
+            novel for USA Network and was renewed for a second season in 2025.
           </p>
         </motion.div>
 

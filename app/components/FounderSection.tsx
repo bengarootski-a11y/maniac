@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeUp, stagger, viewportOnce } from "../lib/motion";
+import SocialLinks from "./SocialLinks";
 
 // Verified: Wikipedia + Deadline. Roles stated factually, no invented detail.
 const creditStrip = [
@@ -13,7 +14,7 @@ const creditStrip = [
 
 export default function FounderSection() {
   return (
-    <section className="section">
+    <section className="section" id="founder">
       <motion.div
         className="section__inner"
         initial="hidden"
@@ -36,11 +37,7 @@ export default function FounderSection() {
         <motion.h2
           variants={fadeUp}
           className="heading"
-          style={{
-            margin: "1.25rem 0 1.75rem",
-            maxWidth: "none",
-            textAlign: "center",
-          }}
+          style={{ margin: "1.25rem 0 1.75rem", maxWidth: "none", textAlign: "center" }}
         >
           Michael Seitzman
         </motion.h2>
@@ -63,11 +60,14 @@ export default function FounderSection() {
           className="body-copy"
           style={{ margin: "1.25rem auto 0", textAlign: "center" }}
         >
-          His television work also includes <em>Quantico</em>,{" "}
-          <em>Code Black</em>, and <em>Intelligence</em>, alongside feature and
-          documentary projects spanning drama, thriller, legal, and medical
-          storytelling.
+          His other television work includes <em>Quantico</em>,{" "}
+          <em>Code Black</em>, and <em>Intelligence</em>, and he has produced
+          feature films and documentary series.
         </motion.p>
+
+        <motion.div variants={fadeUp} style={{ marginTop: "2rem" }}>
+          <SocialLinks />
+        </motion.div>
 
         <motion.div
           variants={fadeUp}

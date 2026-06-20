@@ -2,11 +2,13 @@
 
 import { motion } from "framer-motion";
 import { fadeUp, stagger, viewportOnce } from "../lib/motion";
+import { CONTACT_HREF } from "../lib/links";
 
 export default function ClosingCTA() {
   return (
     <section
       className="section"
+      id="contact"
       style={{
         position: "relative",
         overflow: "hidden",
@@ -80,15 +82,17 @@ export default function ClosingCTA() {
         </motion.p>
 
         <motion.div variants={fadeUp}>
-          {/* TODO: swap href="#" for a real mailto: / agency contact when available. */}
+          {/* Maniac has no public contact address; inquiries go through WME. */}
           <motion.a
-            href="#"
+            href={CONTACT_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
             className="button button--outline"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2 }}
           >
-            Contact Maniac Productions
+            Contact via WME
           </motion.a>
         </motion.div>
       </motion.div>

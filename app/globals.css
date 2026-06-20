@@ -205,6 +205,94 @@ h3 {
   box-shadow: 0 20px 55px -22px rgba(193, 18, 31, 0.5);
 }
 
+/* Nav + text links */
+.nav-link {
+  position: relative;
+  transition: color 0.25s ease;
+}
+.nav-link:hover {
+  color: var(--color-text);
+}
+.text-link {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--color-crimson-text);
+  white-space: nowrap;
+}
+.text-link:hover {
+  color: var(--color-crimson-hover);
+}
+
+.social-link:hover {
+  color: var(--color-crimson-text);
+  border-color: var(--border-crimson);
+}
+
+/* News list rows */
+.news-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.32fr) 1fr auto;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: baseline;
+  padding: clamp(1.25rem, 2.4vw, 1.8rem) 0;
+  border-bottom: 1px solid var(--border-faint);
+  transition: border-color 0.3s ease;
+}
+.news-row:first-child {
+  border-top: 1px solid var(--border-faint);
+}
+.news-row:hover {
+  border-color: var(--border-crimson);
+}
+.news-row:hover .news-row__title {
+  color: var(--color-crimson-text);
+}
+.news-row__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.news-row__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  font-weight: 400;
+  color: var(--color-text);
+  line-height: 1.2;
+  transition: color 0.25s ease;
+}
+.news-row__arrow {
+  color: var(--color-dim);
+  font-size: 1rem;
+}
+
+@media (max-width: 640px) {
+  .news-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .news-row__meta {
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+  .news-row__arrow {
+    display: none;
+  }
+}
+
+/* Page header (interior routes, clears the fixed nav) */
+.page-header {
+  padding: calc(68px + clamp(4rem, 10vh, 7rem)) var(--section-padding-x)
+    clamp(2rem, 4vw, 3rem);
+}
+
 /* Editorial row (range / formats) */
 .editorial-row {
   display: grid;

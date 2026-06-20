@@ -168,9 +168,9 @@ export default function HeroVideo() {
             margin: "1.5rem 0",
           }}
         >
-          Film and television,
+          Maniac
           <br />
-          founded by Michael Seitzman.
+          Productions
         </motion.h1>
 
         <motion.p
@@ -185,9 +185,9 @@ export default function HeroVideo() {
             marginBottom: "2.5rem",
           }}
         >
-          Maniac Productions develops drama across broadcast, cable, streaming,
-          and feature film — currently in an overall deal at Blumhouse
-          Television.
+          The film and television company founded by Michael Seitzman. Network
+          drama, documentary, and feature film, currently under an overall deal
+          at Blumhouse Television.
         </motion.p>
 
         <motion.div variants={item}>

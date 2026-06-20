@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import ScrollProgress from "./components/ScrollProgress";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,9 +21,13 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Maniac Productions",
+  metadataBase: new URL("https://maniac.la"),
+  title: {
+    default: "Maniac Productions",
+    template: "%s · Maniac Productions",
+  },
   description:
-    "Film and television from Maniac Productions, founded by Michael Seitzman.",
+    "Film and television from Maniac Productions, the company founded by writer-producer Michael Seitzman.",
 };
 
 export default function RootLayout({
@@ -34,7 +40,9 @@ export default function RootLayout({
         <div className="grain-overlay" aria-hidden="true" />
         {/* Scroll-driven progress indicator */}
         <ScrollProgress />
+        <Nav />
         {children}
+        <Footer />
       </body>
     </html>
   );
