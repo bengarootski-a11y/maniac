@@ -20,17 +20,24 @@ export default function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
 
-  // Force the muted *property* (React doesn't reliably set it) and kick off
-  // playback as soon as the element mounts, so the intro autoplays instead of
-  // showing a play button on Safari/mobile.
+  // Force the muted *property* (React doesn't reliably set it) so the browser
+  // allows autoplay. Actual playback is kicked off in onCanPlay below.
   const attachVideo = useCallback((node: HTMLVideoElement | null) => {
     videoRef.current = node;
     if (node) {
       node.muted = true;
       node.defaultMuted = true;
-      const p = node.play();
-      if (p && typeof p.catch === "function") p.catch(() => {});
     }
+  }, []);
+
+  // Play once the video can play; if autoplay is blocked, skip the intro
+  // instead of leaving a paused video with a play button.
+  const startIntro = useCallback(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    const p = v.play();
+    if (p && typeof p.catch === "function") p.catch(() => setIntroDone(true));
   }, []);
 
   // The logo plays ONCE as a cinematic reveal, then steps aside (no infinite loop).
@@ -103,6 +110,7 @@ export default function HeroVideo() {
               playsInline
               preload="auto"
               aria-hidden="true"
+              onCanPlay={startIntro}
               onEnded={() => setIntroDone(true)}
               style={{
                 width: "100%",
