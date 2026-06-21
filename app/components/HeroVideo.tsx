@@ -2,7 +2,7 @@
 
 // Future upgrade: convert hero video into a frame sequence and scrub on scroll with canvas.
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   motion,
   AnimatePresence,
@@ -19,6 +19,19 @@ export default function HeroVideo() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
+
+  // Force the muted *property* (React doesn't reliably set it) and kick off
+  // playback as soon as the element mounts, so the intro autoplays instead of
+  // showing a play button on Safari/mobile.
+  const attachVideo = useCallback((node: HTMLVideoElement | null) => {
+    videoRef.current = node;
+    if (node) {
+      node.muted = true;
+      node.defaultMuted = true;
+      const p = node.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    }
+  }, []);
 
   // The logo plays ONCE as a cinematic reveal, then steps aside (no infinite loop).
   const [introDone, setIntroDone] = useState(false);
@@ -84,7 +97,7 @@ export default function HeroVideo() {
             }}
           >
             <video
-              ref={videoRef}
+              ref={attachVideo}
               autoPlay
               muted
               playsInline
