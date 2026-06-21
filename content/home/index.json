@@ -1,0 +1,52 @@
+{
+  "hero": {
+    "label": "Film & Television · Los Angeles",
+    "titleLine1": "Maniac",
+    "titleLine2": "Productions",
+    "paragraph": "The film and television company founded by Michael Seitzman — network drama, documentary, and feature film.",
+    "ctaLabel": "View Selected Work"
+  },
+  "studio": {
+    "label": "The Studio",
+    "heading": "From network drama to feature film.",
+    "body": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Maniac Productions was founded in 2017 by writer-producer Michael Seitzman, alongside former CBS drama head Christina Davis. The company makes scripted and unscripted series for broadcast, cable, and streaming, and has produced feature films and documentary work."
+            }
+          ]
+        },
+        {
+          "type": "p",
+          "children": [
+            { "type": "text", "text": "Its current series, " },
+            { "type": "text", "text": "The Rainmaker", "italic": true },
+            {
+              "type": "text",
+              "text": ", adapts the John Grisham novel for USA Network and was renewed for a second season in 2025."
+            }
+          ]
+        }
+      ]
+    },
+    "facts": [
+      { "k": "Founded", "v": "2017, Los Angeles" },
+      { "k": "Current series", "v": "The Rainmaker (USA Network)" },
+      { "k": "Develops for", "v": "Broadcast · Cable · Streaming" },
+      { "k": "Disciplines", "v": "Scripted & Unscripted · Feature Film" },
+      { "k": "Representation", "v": "WME" }
+    ]
+  },
+  "closing": {
+    "label": "Contact",
+    "headingLine1": "Maniac Productions",
+    "headingLine2": "Los Angeles",
+    "paragraph": "For inquiries regarding film and television projects. Maniac Productions and Michael Seitzman are represented by WME.",
+    "ctaLabel": "Contact via WME"
+  }
+}

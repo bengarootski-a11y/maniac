@@ -1,9 +1,11 @@
-// External links used across the site.
+// Site-wide links are managed by TinaCMS in content/settings/index.json.
+import settings from "../../content/settings/index.json";
+
 export const SOCIAL = {
-  instagram: "https://www.instagram.com/mseitzman/",
-  twitter: "https://x.com/michaelseitzman",
+  instagram: settings.instagram,
+  twitter: settings.twitter,
 };
 
-// Maniac Productions and Michael Seitzman are represented by WME.
-// The contact CTA points to the agency until a direct contact exists.
-export const CONTACT_HREF = "https://www.wmeagency.com/";
+export const CONTACT_HREF = settings.contactHref;
+export const COPYRIGHT = settings.copyright;
+export const FOOTER_TAGLINE = settings.footerTagline;

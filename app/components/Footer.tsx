@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SocialLinks from "./SocialLinks";
+import { COPYRIGHT, FOOTER_TAGLINE } from "../lib/links";
 
 export default function Footer() {
   return (
@@ -39,7 +40,7 @@ export default function Footer() {
               letterSpacing: "0.04em",
             }}
           >
-            Film &amp; Television · Los Angeles
+            {FOOTER_TAGLINE}
           </p>
         </div>
 
@@ -55,7 +56,7 @@ export default function Footer() {
         }}
       >
         <p style={{ fontSize: "0.75rem", color: "var(--color-dim)" }}>
-          Copyright © 2026 Maniac Productions — All Rights Reserved.
+          {COPYRIGHT}
         </p>
       </div>
     </footer>

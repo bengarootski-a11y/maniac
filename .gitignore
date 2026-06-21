@@ -32,3 +32,7 @@ next-env.d.ts
 
 # vercel
 .vercel
+
+# tinacms (generated at build by `tinacms build`)
+tina/__generated__
+public/admin

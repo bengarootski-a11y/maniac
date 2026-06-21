@@ -11,6 +11,9 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import { EASE } from "../lib/motion";
+import home from "../../content/home/index.json";
+
+const hero = home.hero;
 
 export default function HeroVideo() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -152,7 +155,7 @@ export default function HeroVideo() {
         }}
       >
         <motion.span variants={item} className="label">
-          Film &amp; Television · Los Angeles
+          {hero.label}
         </motion.span>
 
         <motion.h1
@@ -168,9 +171,9 @@ export default function HeroVideo() {
             margin: "1.5rem 0",
           }}
         >
-          Maniac
+          {hero.titleLine1}
           <br />
-          Productions
+          {hero.titleLine2}
         </motion.h1>
 
         <motion.p
@@ -185,13 +188,12 @@ export default function HeroVideo() {
             marginBottom: "2.5rem",
           }}
         >
-          The film and television company founded by Michael Seitzman — network
-          drama, documentary, and feature film.
+          {hero.paragraph}
         </motion.p>
 
         <motion.div variants={item}>
           <a href="#selected-work" className="button button--primary">
-            View Selected Work
+            {hero.ctaLabel}
           </a>
         </motion.div>
       </motion.div>

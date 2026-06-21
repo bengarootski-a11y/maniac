@@ -205,6 +205,11 @@ h3 {
   box-shadow: 0 20px 55px -22px rgba(193, 18, 31, 0.5);
 }
 
+/* Rich-text (Tina) paragraph spacing — matches prior inline paragraphs */
+.rich p + p {
+  margin-top: 1.25rem;
+}
+
 /* Founder layout */
 .founder-grid {
   display: grid;

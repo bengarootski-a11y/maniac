@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import { fadeUp, stagger, viewportOnce } from "../lib/motion";
 import { CONTACT_HREF } from "../lib/links";
 import Parallax from "./Parallax";
+import home from "../../content/home/index.json";
+
+const closing = home.closing;
 
 export default function ClosingCTA() {
   return (
@@ -54,7 +57,7 @@ export default function ClosingCTA() {
         }}
       >
         <motion.span variants={fadeUp} className="label">
-          Contact
+          {closing.label}
         </motion.span>
 
         <motion.h2
@@ -69,10 +72,10 @@ export default function ClosingCTA() {
             margin: "1.25rem 0",
           }}
         >
-          Maniac Productions
+          {closing.headingLine1}
           <br />
           <span style={{ fontStyle: "italic", color: "var(--color-body)" }}>
-            Los Angeles
+            {closing.headingLine2}
           </span>
         </motion.h2>
 
@@ -81,8 +84,7 @@ export default function ClosingCTA() {
           className="body-copy"
           style={{ margin: "1rem auto 2.75rem", textAlign: "center", maxWidth: "46ch" }}
         >
-          For inquiries regarding film and television projects. Maniac
-          Productions and Michael Seitzman are represented by WME.
+          {closing.paragraph}
         </motion.p>
 
         <motion.div variants={fadeUp}>
@@ -96,7 +98,7 @@ export default function ClosingCTA() {
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2 }}
           >
-            Contact via WME
+            {closing.ctaLabel}
           </motion.a>
         </motion.div>
       </motion.div>

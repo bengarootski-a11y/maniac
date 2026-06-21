@@ -4,14 +4,10 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeUp, stagger, viewportOnce } from "../lib/motion";
 import SocialLinks from "./SocialLinks";
+import RichText from "./RichText";
+import founder from "../../content/founder/index.json";
 
-// Verified: Wikipedia + Deadline. Roles stated factually, no invented detail.
-const creditStrip = [
-  "Writer · Producer · Director",
-  "Founder, Maniac Productions",
-  "Showrunner, The Rainmaker",
-  "Los Angeles",
-];
+const creditStrip = founder.creditStrip.map((c) => c.text);
 
 export default function FounderSection() {
   return (
@@ -37,7 +33,7 @@ export default function FounderSection() {
         {/* Bio */}
         <div>
           <motion.span variants={fadeUp} className="label">
-            Founder
+            {founder.label}
           </motion.span>
 
           <motion.h2
@@ -45,27 +41,12 @@ export default function FounderSection() {
             className="heading"
             style={{ margin: "1.25rem 0 1.75rem", maxWidth: "none" }}
           >
-            Michael Seitzman
+            {founder.name}
           </motion.h2>
 
-          <motion.p variants={fadeUp} className="body-copy">
-            Michael Seitzman is a writer, producer, and director, and the
-            founder of Maniac Productions. He is best known for writing the
-            feature film <em>North Country</em>, which earned two Academy Award
-            nominations, and serves as creator, showrunner, and executive
-            producer of <em>The Rainmaker</em>, USA Network&apos;s adaptation of
-            the John Grisham novel.
-          </motion.p>
-
-          <motion.p
-            variants={fadeUp}
-            className="body-copy"
-            style={{ marginTop: "1.25rem" }}
-          >
-            His other television work includes <em>Quantico</em>,{" "}
-            <em>Code Black</em>, and <em>Intelligence</em>, and he has produced
-            feature films and documentary series.
-          </motion.p>
+          <motion.div variants={fadeUp}>
+            <RichText content={founder.bioHome} />
+          </motion.div>
 
           <motion.div variants={fadeUp} style={{ marginTop: "2rem" }}>
             <SocialLinks />

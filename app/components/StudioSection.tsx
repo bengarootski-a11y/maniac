@@ -3,16 +3,10 @@
 import { motion } from "framer-motion";
 import { fadeUp, stagger, viewportOnce } from "../lib/motion";
 import Parallax from "./Parallax";
+import RichText from "./RichText";
+import home from "../../content/home/index.json";
 
-// Verified facts: founded 2017 (Deadline), develops for broadcast/cable/streaming
-// (Deadline), represented by WME (maniacprods.com/about).
-const facts: { k: string; v: string }[] = [
-  { k: "Founded", v: "2017, Los Angeles" },
-  { k: "Current series", v: "The Rainmaker (USA Network)" },
-  { k: "Develops for", v: "Broadcast · Cable · Streaming" },
-  { k: "Disciplines", v: "Scripted & Unscripted · Feature Film" },
-  { k: "Representation", v: "WME" },
-];
+const studio = home.studio;
 
 export default function StudioSection() {
   return (
@@ -32,20 +26,11 @@ export default function StudioSection() {
       >
         {/* Left */}
         <motion.div variants={fadeUp}>
-          <span className="label">The Studio</span>
+          <span className="label">{studio.label}</span>
           <h2 className="heading" style={{ margin: "1.25rem 0 1.75rem" }}>
-            From network drama to feature film.
+            {studio.heading}
           </h2>
-          <p className="body-copy">
-            Maniac Productions was founded in 2017 by writer-producer Michael
-            Seitzman, alongside former CBS drama head Christina Davis. The
-            company makes scripted and unscripted series for broadcast, cable,
-            and streaming, and has produced feature films and documentary work.
-          </p>
-          <p className="body-copy" style={{ marginTop: "1.25rem" }}>
-            Its current series, <em>The Rainmaker</em>, adapts the John Grisham
-            novel for USA Network and was renewed for a second season in 2025.
-          </p>
+          <RichText content={studio.body} />
         </motion.div>
 
         {/* Right — fact card (scroll-linked drift) */}
@@ -59,7 +44,7 @@ export default function StudioSection() {
             At a glance
           </span>
           <div style={{ marginTop: "1.25rem" }}>
-            {facts.map((f) => (
+            {studio.facts.map((f) => (
               <div key={f.k} className="fact-row">
                 <span
                   style={{
