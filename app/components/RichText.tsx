@@ -1,62 +1,52 @@
 import { Fragment } from "react";
 import type { ReactNode } from "react";
 
-// Lightweight renderer for TinaCMS rich-text fields. Handles the node types
-// the editor produces (paragraphs, headings, lists, links, line breaks and
-// inline marks) without shipping the full TinaMarkdown runtime to the browser.
-// Paragraphs use .body-copy; spacing between them is handled by .rich in CSS.
+// Renders plain-text content (from Tina textarea fields) into body copy.
+// Paragraphs are separated by a blank line. Inline markup supported:
+//   *italics*  **bold**  [label](https://url)
+// Output matches the previous design (italic show titles, etc.). Paragraph
+// spacing is handled by .rich in CSS.
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-type Node = any;
+const INLINE = /(\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\(([^)]+)\))/g;
 
-function renderChildren(children: Node[] | undefined): ReactNode {
-  if (!children) return null;
-  return children.map((child, i) => <Fragment key={i}>{renderNode(child)}</Fragment>);
-}
-
-function renderText(node: Node): ReactNode {
-  let el: ReactNode = node.text ?? "";
-  if (node.italic) el = <em>{el}</em>;
-  if (node.bold) el = <strong>{el}</strong>;
-  if (node.code) el = <code>{el}</code>;
-  return el;
-}
-
-function renderNode(node: Node): ReactNode {
-  if (!node) return null;
-  switch (node.type) {
-    case "text":
-      return renderText(node);
-    case "p":
-      return <p className="body-copy">{renderChildren(node.children)}</p>;
-    case "h1":
-      return <h1>{renderChildren(node.children)}</h1>;
-    case "h2":
-      return <h2>{renderChildren(node.children)}</h2>;
-    case "h3":
-      return <h3>{renderChildren(node.children)}</h3>;
-    case "ul":
-      return <ul>{renderChildren(node.children)}</ul>;
-    case "ol":
-      return <ol>{renderChildren(node.children)}</ol>;
-    case "li":
-      return <li>{renderChildren(node.children)}</li>;
-    case "lic":
-      return <>{renderChildren(node.children)}</>;
-    case "a":
-      return (
-        <a href={node.url} target="_blank" rel="noopener noreferrer">
-          {renderChildren(node.children)}
+function renderInline(text: string): ReactNode[] {
+  const nodes: ReactNode[] = [];
+  let last = 0;
+  let key = 0;
+  let m: RegExpExecArray | null;
+  INLINE.lastIndex = 0;
+  while ((m = INLINE.exec(text)) !== null) {
+    if (m.index > last) nodes.push(text.slice(last, m.index));
+    if (m[2]) {
+      nodes.push(<strong key={key++}>{m[2]}</strong>);
+    } else if (m[3]) {
+      nodes.push(<em key={key++}>{m[3]}</em>);
+    } else if (m[4]) {
+      nodes.push(
+        <a key={key++} href={m[5]} target="_blank" rel="noopener noreferrer">
+          {m[4]}
         </a>
       );
-    case "br":
-      return <br />;
-    default:
-      return renderChildren(node.children);
+    }
+    last = m.index + m[0].length;
   }
+  if (last < text.length) nodes.push(text.slice(last));
+  return nodes;
 }
 
-export default function RichText({ content }: { content: unknown }) {
-  const root = content as Node;
-  return <div className="rich">{renderChildren(root?.children)}</div>;
+export default function RichText({ content }: { content?: string }) {
+  const paragraphs = (content || "")
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+
+  return (
+    <div className="rich">
+      {paragraphs.map((p, i) => (
+        <p key={i} className="body-copy">
+          <Fragment>{renderInline(p)}</Fragment>
+        </p>
+      ))}
+    </div>
+  );
 }

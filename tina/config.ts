@@ -54,7 +54,14 @@ export default defineConfig({
             fields: [
               { type: "string", name: "label", label: "Eyebrow label" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "rich-text", name: "body", label: "Body" },
+              {
+                type: "string",
+                name: "body",
+                label: "Body",
+                ui: { component: "textarea" },
+                description:
+                  "Separate paragraphs with a blank line. Wrap words in *asterisks* for italics (e.g. show titles).",
+              },
               {
                 type: "object",
                 name: "facts",
@@ -95,8 +102,22 @@ export default defineConfig({
         fields: [
           { type: "string", name: "label", label: "Eyebrow label" },
           { type: "string", name: "name", label: "Name" },
-          { type: "rich-text", name: "bioHome", label: "Bio (home section)" },
-          { type: "rich-text", name: "bioPage", label: "Bio (founder page)" },
+          {
+            type: "string",
+            name: "bioHome",
+            label: "Bio (home section)",
+            ui: { component: "textarea" },
+            description:
+              "Separate paragraphs with a blank line. Wrap words in *asterisks* for italics (e.g. show titles).",
+          },
+          {
+            type: "string",
+            name: "bioPage",
+            label: "Bio (founder page)",
+            ui: { component: "textarea" },
+            description:
+              "Separate paragraphs with a blank line. Wrap words in *asterisks* for italics (e.g. show titles).",
+          },
           {
             type: "object",
             name: "creditStrip",

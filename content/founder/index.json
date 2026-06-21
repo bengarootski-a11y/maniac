@@ -1,85 +1,8 @@
 {
   "label": "Founder",
   "name": "Michael Seitzman",
-  "bioHome": {
-    "type": "root",
-    "children": [
-      {
-        "type": "p",
-        "children": [
-          {
-            "type": "text",
-            "text": "Michael Seitzman is a writer, producer, and director, and the founder of Maniac Productions. He is best known for writing the feature film "
-          },
-          { "type": "text", "text": "North Country", "italic": true },
-          {
-            "type": "text",
-            "text": ", which earned two Academy Award nominations, and serves as creator, showrunner, and executive producer of "
-          },
-          { "type": "text", "text": "The Rainmaker", "italic": true },
-          { "type": "text", "text": ", USA Network's adaptation of the John Grisham novel." }
-        ]
-      },
-      {
-        "type": "p",
-        "children": [
-          { "type": "text", "text": "His other television work includes " },
-          { "type": "text", "text": "Quantico", "italic": true },
-          { "type": "text", "text": ", " },
-          { "type": "text", "text": "Code Black", "italic": true },
-          { "type": "text", "text": ", and " },
-          { "type": "text", "text": "Intelligence", "italic": true },
-          { "type": "text", "text": ", and he has produced feature films and documentary series." }
-        ]
-      }
-    ]
-  },
-  "bioPage": {
-    "type": "root",
-    "children": [
-      {
-        "type": "p",
-        "children": [
-          {
-            "type": "text",
-            "text": "Michael Seitzman is a writer, producer, and director. He founded Maniac Productions in 2017 with former CBS drama head Christina Davis, and has run the company across network drama, documentary, and feature film."
-          }
-        ]
-      },
-      {
-        "type": "p",
-        "children": [
-          { "type": "text", "text": "He wrote the feature film " },
-          { "type": "text", "text": "North Country", "italic": true },
-          {
-            "type": "text",
-            "text": ", which earned two Academy Award nominations, and went on to run network drama as showrunner of "
-          },
-          { "type": "text", "text": "Quantico", "italic": true },
-          { "type": "text", "text": ", " },
-          { "type": "text", "text": "Code Black", "italic": true },
-          { "type": "text", "text": ", and " },
-          { "type": "text", "text": "Intelligence", "italic": true },
-          { "type": "text", "text": ". He is the creator, showrunner, and executive producer of " },
-          { "type": "text", "text": "The Rainmaker", "italic": true },
-          {
-            "type": "text",
-            "text": ", USA Network's adaptation of the John Grisham novel, which was renewed for a second season in 2025."
-          }
-        ]
-      },
-      {
-        "type": "p",
-        "children": [
-          { "type": "text", "text": "His work also extends to documentary and feature film, from the Disney+ series " },
-          { "type": "text", "text": "Choir", "italic": true },
-          { "type": "text", "text": " to the Blumhouse thriller " },
-          { "type": "text", "text": "Incarnate", "italic": true },
-          { "type": "text", "text": ". Maniac Productions and Michael Seitzman are represented by WME." }
-        ]
-      }
-    ]
-  },
+  "bioHome": "Michael Seitzman is a writer, producer, and director, and the founder of Maniac Productions. He is best known for writing the feature film *North Country*, which earned two Academy Award nominations, and serves as creator, showrunner, and executive producer of *The Rainmaker*, USA Network's adaptation of the John Grisham novel.\n\nHis other television work includes *Quantico*, *Code Black*, and *Intelligence*, and he has produced feature films and documentary series.",
+  "bioPage": "Michael Seitzman is a writer, producer, and director. He founded Maniac Productions in 2017 with former CBS drama head Christina Davis, and has run the company across network drama, documentary, and feature film.\n\nHe wrote the feature film *North Country*, which earned two Academy Award nominations, and went on to run network drama as showrunner of *Quantico*, *Code Black*, and *Intelligence*. He is the creator, showrunner, and executive producer of *The Rainmaker*, USA Network's adaptation of the John Grisham novel, which was renewed for a second season in 2025.\n\nHis work also extends to documentary and feature film, from the Disney+ series *Choir* to the Blumhouse thriller *Incarnate*. Maniac Productions and Michael Seitzman are represented by WME.",
   "creditStrip": [
     { "text": "Writer · Producer · Director" },
     { "text": "Founder, Maniac Productions" },
