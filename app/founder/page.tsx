@@ -12,7 +12,7 @@ export default function FounderPage() {
     <main style={{ backgroundColor: "var(--color-bg)" }}>
       <header className="page-header">
         <div className="section__inner" style={{ maxWidth: "820px" }}>
-          <span className="label">Founder</span>
+          <span className="label">Staff</span>
           <h1
             className="heading"
             style={{ marginTop: "1.25rem", fontSize: "clamp(2.6rem, 6.5vw, 5rem)" }}

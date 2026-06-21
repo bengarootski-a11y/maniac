@@ -6,7 +6,7 @@ import { CONTACT_HREF } from "../lib/links";
 
 const links = [
   { href: "/work", label: "Work" },
-  { href: "/founder", label: "Founder" },
+  { href: "/founder", label: "Staff" },
   { href: "/news", label: "News" },
 ];
 
